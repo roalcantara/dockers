@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/roalcantara/dockers/compare/v1.0.1...v1.0.2) (2023-02-06)
+
+
+### Bug Fixes
+
+* **ci:** Add GH_TOKEN secret ([a8ef33d](https://github.com/roalcantara/dockers/commit/a8ef33d1e7e65b8ccd175e6d62202dc1bda74de2))
+
 ## [1.0.1](https://github.com/roalcantara/dockers/compare/v1.0.0...v1.0.1) (2023-02-06)
 
 
