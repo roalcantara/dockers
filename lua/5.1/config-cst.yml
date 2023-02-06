@@ -1,0 +1,11 @@
+schemaVersion: 2.0.0
+
+commandTests:
+  - name: Lua is present
+    command: which
+    args: [lua]
+    expectedOutput: [/usr/bin/lua]
+  - name: Moon is present
+    command: which
+    args: [moonc]
+    expectedOutput: [/usr/bin/moonc]
