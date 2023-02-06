@@ -1,12 +1,11 @@
+
 # Dockers
+
+[![Build](https://github.com/roalcantara/dockers/actions/workflows/build.yml/badge.svg)](https://github.com/roalcantara/dockers/actions/workflows/build.yml) [![Release](https://github.com/roalcantara/dockers/actions/workflows/release.yml/badge.svg)](https://github.com/roalcantara/dockers/actions/workflows/release.yml) [![Publish](https://github.com/roalcantara/dockers/actions/workflows/publish.yml/badge.svg)](https://github.com/roalcantara/dockers/actions/workflows/publish.yml)
 
 A [Dockerfile][10] collection
 
-[![MIT license](https://img.shields.io/badge/License-MIT-brightgreen.svg)](LICENSE)
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.0-4baaaa.svg)][2]
-[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg)][5]
-[![Editor Config](https://img.shields.io/badge/Editor%20Config-1.0.1-crimson.svg)][4]
-[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)][3]
+[![MIT license](https://img.shields.io/badge/License-MIT-brightgreen.svg)](LICENSE) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.0-4baaaa.svg)][2] [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg)][5] [![Editor Config](https://img.shields.io/badge/Editor%20Config-1.0.1-crimson.svg)][4] [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)][3]
 
 ## Install
 
