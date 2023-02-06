@@ -38,13 +38,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - if: steps.semantic.outputs.new_release_published == 'true'
         run: |
-          echo Version => ${{ steps.semantic.outputs.new_release_version }}
-          echo Major Version => ${{ steps.semantic.outputs.new_release_major_version }}
-          echo Minor Version => ${{ steps.semantic.outputs.new_release_minor_version }}
-          echo Patch Version => ${{ steps.semantic.outputs.new_release_patch_version }}
-          echo SHA Last Commit => ${{ steps.semantic.outputs.new_release_git_head }}
-          echo Git Tag => ${{ steps.semantic.outputs.new_release_git_tag }}
-          echo LAST RELEASE Prev Version (if exists) => ${{ steps.semantic.outputs.last_release_version }}
-          echo LAST RELEASE SHA Last commit (if exists) => ${{ steps.semantic.outputs.last_release_git_head }}
-          echo LAST RELEASE Git Tag (if exists) => ${{ steps.semantic.outputs.last_release_git_tag }}
-          echo Release Notes  => ${{ steps.semantic.outputs.new_release_notes }}
+          echo "Version => ${{ steps.semantic.outputs.new_release_version }}"
+          echo "Major Version => ${{ steps.semantic.outputs.new_release_major_version }}"
+          echo "Minor Version => ${{ steps.semantic.outputs.new_release_minor_version }}"
+          echo "Patch Version => ${{ steps.semantic.outputs.new_release_patch_version }}"
+          echo "SHA Last Commit => ${{ steps.semantic.outputs.new_release_git_head }}"
+          echo "Git Tag => ${{ steps.semantic.outputs.new_release_git_tag }}"
+          echo "LAST RELEASE Prev Version (if exists) => ${{ steps.semantic.outputs.last_release_version }}"
+          echo "LAST RELEASE SHA Last commit (if exists) => ${{ steps.semantic.outputs.last_release_git_head }}"
+          echo "LAST RELEASE Git Tag (if exists) => ${{ steps.semantic.outputs.last_release_git_tag }}"
