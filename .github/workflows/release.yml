@@ -10,41 +10,56 @@ env:
   FORCE_COLOR: true
   SEMANTIC_VERSION: 19
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 defaults:
   run:
     shell: bash
-
-concurrency:
-  group: ${{ github.ref }}
-  cancel-in-progress: true
 
 jobs:
   release:
     environment: prod
     runs-on: ubuntu-latest
     if: "!contains(toJSON(github.event.commits.*.message), '[skip-ci]') && !contains(toJSON(github.event.commits.*.message), '[skip ci]')"
+    strategy:
+      matrix:
+        image: [lua/5.1, remark/cli]
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-      - name: Create release
-        uses: cycjimmy/semantic-release-action@v3
-        if: success()
-        id: semantic
-        with:
-          semantic_version: ${{ env.SEMANTIC_VERSION }}
-          working_directory: lua/5.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-      - if: steps.semantic.outputs.new_release_published == 'true'
-        run: |
-          echo "Version => ${{ steps.semantic.outputs.new_release_version }}"
-          echo "Major Version => ${{ steps.semantic.outputs.new_release_major_version }}"
-          echo "Minor Version => ${{ steps.semantic.outputs.new_release_minor_version }}"
-          echo "Patch Version => ${{ steps.semantic.outputs.new_release_patch_version }}"
-          echo "SHA Last Commit => ${{ steps.semantic.outputs.new_release_git_head }}"
-          echo "Git Tag => ${{ steps.semantic.outputs.new_release_git_tag }}"
-          echo "LAST RELEASE Prev Version (if exists) => ${{ steps.semantic.outputs.last_release_version }}"
-          echo "LAST RELEASE SHA Last commit (if exists) => ${{ steps.semantic.outputs.last_release_git_head }}"
-          echo "LAST RELEASE Git Tag (if exists) => ${{ steps.semantic.outputs.last_release_git_tag }}"
+    - id: image
+      run: |
+        echo "dockerfile=${CONTEXT}/Dockerfile" >> $GITHUB_OUTPUT
+        echo "cst_config=${CONTEXT}/config-cst.yml" >> $GITHUB_OUTPUT
+        echo "name=${CONTEXT//\//_}" >> $GITHUB_OUTPUT
+        echo "full_name=${{ github.actor }}/${CONTEXT//\//_}" >> $GITHUB_OUTPUT
+        echo "latest=${{ github.actor }}/${CONTEXT//\//_}:latest" >> $GITHUB_OUTPUT
+        echo "ghcr=ghcr.io/${{ github.actor }}/${CONTEXT//\//_}" >> $GITHUB_OUTPUT
+        echo "gh_latest=ghcr.io/${{ github.actor }}/${CONTEXT//\//_}:latest" >> $GITHUB_OUTPUT
+      env:
+        CONTEXT: ${{ matrix.image }}
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        persist-credentials: false
+    - name: Create release
+      uses: cycjimmy/semantic-release-action@v3
+      if: success()
+      id: semantic
+      with:
+        semantic_version: ${{ env.SEMANTIC_VERSION }}
+        working_directory: ${{ matrix.context }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+    - if: steps.semantic.outputs.new_release_published == 'true'
+      run: |
+        echo "Image => ${{ matrix.image }}"
+        echo "Version => ${{ steps.semantic.outputs.new_release_version }}"
+        echo "Major Version => ${{ steps.semantic.outputs.new_release_major_version }}"
+        echo "Minor Version => ${{ steps.semantic.outputs.new_release_minor_version }}"
+        echo "Patch Version => ${{ steps.semantic.outputs.new_release_patch_version }}"
+        echo "SHA Last Commit => ${{ steps.semantic.outputs.new_release_git_head }}"
+        echo "Git Tag => ${{ steps.semantic.outputs.new_release_git_tag }}"
+        echo "LAST RELEASE Prev Version (if exists) => ${{ steps.semantic.outputs.last_release_version }}"
+        echo "LAST RELEASE SHA Last commit (if exists) => ${{ steps.semantic.outputs.last_release_git_head }}"
+        echo "LAST RELEASE Git Tag (if exists) => ${{ steps.semantic.outputs.last_release_git_tag }}"

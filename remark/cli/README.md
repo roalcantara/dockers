@@ -1,6 +1,6 @@
-# Lua Development
+# Remark CLI Container
 
-A [Dockerfile][10] for [Lua][13] [5.1.5][14] based on [alpine linux][12].
+A [Dockerfile][10] for [remark-cli][13] [remark-reference-links][14] based on [alpine linux][12].
 
 [![MIT license](https://img.shields.io/badge/License-MIT-brightgreen.svg)](LICENSE)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.0-4baaaa.svg)][2]
@@ -24,31 +24,19 @@ git clone https://github.com/roalcantara/dockers.git
 
 ## Image
 
-- [lua][13] [5.1.5][14] [Dockerfile](Dockerfile)
+- [remark-cli][13] [remark-reference-links][14] [Dockerfile](Dockerfile)
 
-- rocks
+- npm packages
 
-  - lua
-  - lua-alt-getopt
-  - lua-busted
-  - lua-dev
-  - lua-doc
-  - lua-filesystem
-  - lua-inspect
-  - lua-lpeg-dev
-  - lua-luassert
-  - lua-penlight
-  - lua-say
-  - lua-term
-  - luarocks
-  - moonscript
+  - [remark-cli][13]
+  - [remark-reference-links][14]
 
 ## Usage
 
-- Compile moon files at `/app/src` to `/app/lua`
+- Transform all the inline links to numerically-ascending reference-style links
 
     ```sh
-    docker run --workdir /app/src -v $(pwd):/app --name lua5 -it --rm roalcantara/lua_5.1 moonc -t /app/lua .
+    docker run --rm -i -v $PWD:/app roalcantara/remark_cli /path/to/md/at/app/ --use remark-reference-links --output
     ```
 
 ## Acknowledgements
@@ -80,5 +68,5 @@ The project is available as open source under the terms of the [MIT][1] [License
 [10]: https://docs.docker.com/engine/reference/builder "Dockerfile reference"
 [11]: https://github.com/hadolint/hadolint "Dockerfile linter"
 [12]: https://www.alpinelinux.org/ "Alpine Linux: A security-oriented, lightweight Linux distribution based on musl libc and busybox"
-[13]: https://www.lua.org "Lua"
-[14]: https://www.lua.org/manual/5.1/
+[13]: https://npmjs.com/package/remark-cli "Command line interface to inspect and change markdown files with remark"
+[14]: https://www.npmjs.com/package/remark-reference-links "Remark plugin to change links and images to references with separate definitions"
