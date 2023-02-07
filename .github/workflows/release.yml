@@ -20,24 +20,9 @@ defaults:
 
 jobs:
   release:
-    environment: prod
     runs-on: ubuntu-latest
     if: "!contains(toJSON(github.event.commits.*.message), '[skip-ci]') && !contains(toJSON(github.event.commits.*.message), '[skip ci]')"
-    strategy:
-      matrix:
-        image: [lua/5.1, remark/cli]
     steps:
-    - id: image
-      run: |
-        echo "dockerfile=${CONTEXT}/Dockerfile" >> $GITHUB_OUTPUT
-        echo "cst_config=${CONTEXT}/config-cst.yml" >> $GITHUB_OUTPUT
-        echo "name=${CONTEXT//\//_}" >> $GITHUB_OUTPUT
-        echo "full_name=${{ github.actor }}/${CONTEXT//\//_}" >> $GITHUB_OUTPUT
-        echo "latest=${{ github.actor }}/${CONTEXT//\//_}:latest" >> $GITHUB_OUTPUT
-        echo "ghcr=ghcr.io/${{ github.actor }}/${CONTEXT//\//_}" >> $GITHUB_OUTPUT
-        echo "gh_latest=ghcr.io/${{ github.actor }}/${CONTEXT//\//_}:latest" >> $GITHUB_OUTPUT
-      env:
-        CONTEXT: ${{ matrix.image }}
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
@@ -48,12 +33,10 @@ jobs:
       id: semantic
       with:
         semantic_version: ${{ env.SEMANTIC_VERSION }}
-        working_directory: ${{ matrix.context }}
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
     - if: steps.semantic.outputs.new_release_published == 'true'
       run: |
-        echo "Image => ${{ matrix.image }}"
         echo "Version => ${{ steps.semantic.outputs.new_release_version }}"
         echo "Major Version => ${{ steps.semantic.outputs.new_release_major_version }}"
         echo "Minor Version => ${{ steps.semantic.outputs.new_release_minor_version }}"
