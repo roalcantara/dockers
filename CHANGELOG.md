@@ -1,3 +1,11 @@
+## [1.1.1](https://github.com/roalcantara/dockers/compare/v1.1.0...v1.1.1) (2023-02-07)
+
+
+### Bug Fixes
+
+* **ci/release:** Set environemnt to prod ([52a02b1](https://github.com/roalcantara/dockers/commit/52a02b15c7a52ac3717431b91987eadd3135070b))
+* **ci:** Unify release jobs ([5b086cc](https://github.com/roalcantara/dockers/commit/5b086cc99371cef10a1342942283a0e873eeb530))
+
 # [1.1.0](https://github.com/roalcantara/dockers/compare/v1.0.2...v1.1.0) (2023-02-07)
 
 
