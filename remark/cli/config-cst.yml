@@ -1,0 +1,11 @@
+schemaVersion: 2.0.0
+
+commandTests:
+  - name: Npm is present
+    command: which
+    args: [npm]
+    expectedOutput: [/usr/local/bin/npm]
+  - name: Remark CLI is present
+    command: which
+    args: [remark]
+    expectedOutput: [/usr/local/bin/remark]
