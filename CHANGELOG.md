@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/roalcantara/dockers/compare/v1.1.2...v1.1.3) (2023-02-08)
+
+
+### Bug Fixes
+
+* **ci:** Set environment to prod ([a063e50](https://github.com/roalcantara/dockers/commit/a063e50fb8cd2cec0accdf0a82a3d69d41a71ef1))
+
 ## [1.1.2](https://github.com/roalcantara/dockers/compare/v1.1.1...v1.1.2) (2023-02-07)
 
 
